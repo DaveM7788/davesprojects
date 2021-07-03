@@ -1,5 +1,5 @@
-function calcTotalScore(hexDeadlift, powerThrow, tPushUp, sprintDrag, legTuck, twoMile) {
-    return hexDeadlift + powerThrow + tPushUp + sprintDrag + legTuck + twoMile;
+function calcTotalScore(hexDeadlift, powerThrow, tPushUp, sprintDrag, legTuckOrPlank, twoMile) {
+    return hexDeadlift + powerThrow + tPushUp + sprintDrag + legTuckOrPlank + twoMile;
 }
 
 function hexDeadliftScore(weight) {
@@ -602,6 +602,102 @@ function twoMileScore(mins, secs) {
         return 2;
     } else if (t <= ((22*60) + 46)) {
         return 1;
+    } else {
+        return 0;
+    }
+}
+
+function plankScore(mins, secs) {
+    mins = parseInt(mins, 10);
+    secs = parseInt(secs, 10);
+    var t = secs + (mins * 60);
+
+    if (t >= 4 * 60 + 20) {
+        return 100;
+    } else if (t >= 4 * 60 + 17) {
+        return 99;
+    } else if (t >= 4 * 60 + 14) {
+        return 98;
+    } else if (t >= 4 * 60 + 11) {
+        return 97;
+    } else if (t >= 4 * 60 + 7) {
+        return 96;
+    } else if (t >= 4 * 60 + 4) {
+        return 95;
+    } else if (t >= 4 * 60 + 1) {
+        return 94;
+    } else if (t >= 3 * 60 + 58) {
+        return 93;
+    } else if (t >= 3 * 60 + 54) {
+        return 92;
+    } else if (t >= 3 * 60 + 51) {
+        return 91;
+    } else if (t >= 3 * 60 + 48) {
+        return 90;
+    }else if (t >= 3 * 60 + 44) {
+        return 89;
+    }else if (t >= 3 * 60 + 41) {
+        return 88;
+    }else if (t >= 3 * 60 + 38) {
+        return 87;
+    }else if (t >= 3 * 60 + 35) {
+        return 86;
+    }else if (t >= 3 * 60 + 31) {
+        return 85;
+    } else if (t >= 3 * 60 + 28) {
+        return 84;
+    } else if (t >= 3 * 60 + 25) {
+        return 83;
+    } else if (t >= 3 * 60 + 21) {
+        return 82;
+    } else if (t >= 3 * 60 + 18) {
+        return 81;
+    } else if (t >= 3 * 60 + 15) {
+        return 80;
+    } else if (t >= 3 * 60 + 12) {
+        return 79;
+    } else if (t >= 3 * 60 + 8) {
+        return 78;
+    } else if (t >= 3 * 60 + 5) {
+        return 77;
+    } else if (t >= 3 * 60 + 2) {
+        return 76;
+    } else if (t >= 2 * 60 + 58) {
+        return 75;
+    } else if (t >= 2 * 60 + 55) {
+        return 74;
+    } else if (t >= 2 * 60 + 52) {
+        return 73;
+    } else if (t >= 2 * 60 + 49) {
+        return 72;
+    } else if (t >= 2 * 60 + 45) {
+        return 71;
+    } else if (t >= 2 * 60 + 42) {
+        return 70;
+    } else if (t >= 2 * 60 + 39) {
+        return 69;
+    } else if (t >= 2 * 60 + 35) {
+        return 68;
+    } else if (t >= 2 * 60 + 32) {
+        return 67;
+    } else if (t >= 2 * 60 + 29) {
+        return 66;
+    } else if (t >= 2 * 60 + 26) {
+        return 65;
+    } else if (t >= 2 * 60 + 22) {
+        return 64;
+    } else if (t >= 2 * 60 + 19) {
+        return 63;
+    } else if (t >= 2 * 60 + 16) {
+        return 62;
+    } else if (t >= 2 * 60 + 12) {
+        return 61;
+    } else if (t >= 2 * 60 + 9) {
+        return 60;
+    } else if (t >= 2 * 60 + 6) {
+        return 59;
+    } else if (t >= 2 * 60 + 3) {
+        return 58;
     } else {
         return 0;
     }

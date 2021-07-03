@@ -75,8 +75,16 @@
 			    <input class="uniquewidth" type="text" id="sprintDragMin" name="sprintDragMin">
 			    <input class="uniquewidth" type="text" id="sprintDragSec" name="sprintDragSec"><br><br>
 
+				<p> ------------------------------------- </p>
 			    <label for="legTuck">Leg Tucks (reps)</label><br>
 			    <input type="text" id="legTuck" name="legTuck"><br><br>
+
+				<p><b>Or</b></p>
+
+				<label for="plank">Plank (min:sec)</label><br>
+				<input class="uniquewidth" type="text" id="plankMin" name="plankMin">
+			    <input class="uniquewidth" type="text" id="plankSec" name="plankSec"><br><br>
+				<p> ------------------------------------- </p>
 
 			    <label for="twoMileMin">Two Mile Run (min:sec)</label><br>
 			    <input class="uniquewidth" type="text" id="twoMileMin" name="twoMileMin">
@@ -105,6 +113,9 @@
 				<p class="pscore">Leg Tucks Score</p>
 				<p class="pscore" name="legScore" id="legScore">0</p>
 
+				<p class="pscore">Plank Score</p>
+				<p class="pscore" name="plankScore" id="plankScore">0</p>
+
 				<p class="pscore">Two Mile Run Score</p>
 				<p class="pscore" name="twoMScore" id="twoMScore">0</p>
 
@@ -116,15 +127,13 @@
 
       </div>
 
-	
-
       <div class="container">
-      	<p class="lead">The ACFT has 3 standards - Gold, Gray, and Black. Gold is 60 points for that event. Gray is 65 points. Black is 70 points.
-      	To obtain a Black rating overall you need to meet the Black standard (70 points) for each event. This system applies to the Gray and Gold standards as well.
-      	These standards were last updated in October 2019. The ACFT is supposed to officially replace the old APFT in October 2020.</p>
-
-      	<p class="lead">ACFT scores range from 0 to 600. In my opinion, the test is very difficult to max. Very few people can deadlift 340 lbs and run 2 miles
-      	in 13:30. Kudos to anyone who can max this test, you're a monster!!!</p>
+      	<p class="lead">Passing the ACFT requires a score of at least 60 in each event. Scores range from 0 to 600. The Army recently
+			  updated to ACFT 3.0. This update allows a timed plank to substitute for leg tucks. It also gets rid of
+			  the black, gray, and gold standards. There are now tiers based on how well you do relative to everyone else. Platinum
+			  is top 1%, Gold = top 10%, Silver = top 25%, Bronze = top 50%, Green = bottom 50%. The minimum passing score is not
+			  effected by gender however the tiers are.
+		  </p>
 
       	<p class="lead">For more information and training advice, see <a href="https://www.army.mil/acft/">https://www.army.mil/acft/</a></p> 
       </div>
@@ -142,9 +151,6 @@
 
 
 <script>
-	//console.log("hello");
-	//var score = hexDeadliftScore(300);
-	//console.log(score);
 
 	function handleClick() {
 		event.preventDefault();
@@ -157,6 +163,13 @@
 		var tempLT = document.getElementById("legTuck").value;
 		var tempTM = document.getElementById("twoMileMin").value;
 		var tempTS = document.getElementById("twoMileSec").value;
+		var tempPlankMins = document.getElementById("plankMin").value;
+		var tempPlankSecs = document.getElementById("plankSec").value;
+
+		if (tempLT != "" && (tempPlankSecs != "" || tempPlankMins != "")) {
+			alert("You can still calculate scores with both leg tucks and plank inputs however" +
+			" the total score will be invalid.");
+		}
 
 		var deadlift = hexDeadliftScore(tempDL);
 		document.getElementById("deadliftScore").innerHTML = deadlift;
@@ -173,10 +186,20 @@
 		var legtuck = legTuckScore(tempLT); 
 		document.getElementById("legScore").innerHTML = legtuck;
 
+		var plank = plankScore(tempPlankMins, tempPlankSecs); 
+		document.getElementById("plankScore").innerHTML = plank;
+
 		var twomile = twoMileScore(tempTM, tempTS);
 		document.getElementById("twoMScore").innerHTML = twomile;
 
-		var totalscore = calcTotalScore(deadlift, powerthrow, pushups, sprint, legtuck, twomile);
+		var legTucksOrPlank = 0;
+		if (tempLT != "") {
+			legTucksOrPlank = legtuck;
+		} else {
+			legTucksOrPlank = plank;
+		}
+
+		var totalscore = calcTotalScore(deadlift, powerthrow, pushups, sprint, legTucksOrPlank, twomile);
 		document.getElementById("totalScore").innerHTML = totalscore;
 	}
 </script>
